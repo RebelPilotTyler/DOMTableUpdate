@@ -102,11 +102,11 @@ function stop() {
     document.getElementById("startButton").disabled = false;
     document.getElementById("stopButton").disabled = true;
 }
-function getData() {
+function getData() { //Retrieve the data from dataloader.js
     var loadedData = loadData();
     return loadedData;
 }
-function dataRow(legend, value, units) {
+function dataRow(legend, value, units) { //Define a data row from the data in dataloader.js
     msg = "<td>";
     msg += legend;
     msg += ": </td><td>";
