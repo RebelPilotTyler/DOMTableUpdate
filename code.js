@@ -74,12 +74,12 @@ function btrBlastoff() {
     console.log("btrBlastoff() started");
     var currTime = 50;
     for (var i = 0; i < 11; i++) { //Go through the for loop 11 times
-        setTimeout(function() {
+        setTimeout(function () {
             if (currTime >= 25) { //If countdown is greater than or equal to 25
                 document.getElementById("countdownTimer").innerHTML = currTime; //Write the current time to the screen
             }
             else if (currTime == 0) { //If countdown is equal to 0
-                    document.getElementById("countdownTimer").innerHTML = "Blastoff!"; //Display the blastoff message
+                document.getElementById("countdownTimer").innerHTML = "Blastoff!"; //Display the blastoff message
             }
             else { //If the countdown is less than 25
                 document.getElementById("countdownTimer").innerHTML = "Warning, less than halfway to launch, time left = " + currTime; //Write the current time and a message to the screen
@@ -101,6 +101,48 @@ function stop() {
     clearInterval(timer);
     document.getElementById("startButton").disabled = false;
     document.getElementById("stopButton").disabled = true;
+}
+//Function to update the display...
+function updateDisplay() {
+    theTime = new Date();
+    console.log("The time is: " + theTime.getHours() + ":"
+        + (theTime.getMinutes() < 10 ? "0" + theTime.getMinutes() : theTime.getMinutes())
+        + ":" + (theTime.getSeconds() < 10 ? "0" + theTime.getSeconds() : theTime.getSeconds()));
+    var timeRead = data[index].time_seconds;
+    if (timeRead >= 10) {
+        document.getElementById("data").rows["seconds"].innerHTML = dataRow("Time Elapsed", data[index].time_seconds, "seconds");
+        document.getElementById("data").rows["latitude"].innerHTML = dataRow("Latitude", data[index].latitude, " ");
+        document.getElementById("data").rows["longitude"].innerHTML = dataRow("Longitude", data[index].longitude, " ");
+        document.getElementById("data").rows["gps_altitude"].innerHTML = dataRow("GPS Altitude", data[index].gps_altitude, " ");
+        document.getElementById("data").rows["bmp_sensor_altitude"].innerHTML = dataRow("BMP Altitude", data[index].bmpSensor_altitude, " ");
+        document.getElementById("data").rows["bmp_sensor_pressure"].innerHTML = dataRow("BMP Pressure", data[index].bmpSensor_pressure, " ");
+        document.getElementById("data").rows["bmp_sensor_temperature"].innerHTML = dataRow("BMP Temperature", data[index].bmpSensor_temp, " ");
+        document.getElementById("data").rows["digital_sensor_pressure"].innerHTML = dataRow("Digital Temperature", data[index].digSensor_temp, " ");
+        document.getElementById("data").rows["css_sensor_temperature"].innerHTML = dataRow("CSS Temperature", data[index].cssSensor_temp, " ");
+        document.getElementById("data").rows["css_sensor_eco2"].innerHTML = dataRow("CSS ECO2", data[index].cssSensor_eCO2, " ");
+        document.getElementById("data").rows["css_sensor_tvoc"].innerHTML = dataRow("CSS TVOC", data[index].cssSensor_TVOC, " ");
+        document.getElementById("data").rows["uv"].innerHTML = dataRow("UV", data[index].UV, " ");
+        document.getElementById("data").rows["accel_x"].innerHTML = dataRow("Accel X", data[index].accelX, " ");
+        document.getElementById("data").rows["accel_y"].innerHTML = dataRow("Accel Y", data[index].accelY, " ");
+        document.getElementById("data").rows["accel_z"].innerHTML = dataRow("Accel Z", data[index].accelZ, " ");
+        document.getElementById("data").rows["magnetic_x"].innerHTML = dataRow("Magnetic X", data[index].magneticX, " ");
+        document.getElementById("data").rows["magnetic_y"].innerHTML = dataRow("Magnetic Y", data[index].magneticY, " ");
+        document.getElementById("data").rows["magnetic_z"].innerHTML = dataRow("Magnetic Z", data[index].magneticZ, " ");
+        document.getElementById("data").rows["gyro_x"].innerHTML = dataRow("Gyro X", data[index].gyroX, " ");
+        document.getElementById("data").rows["gyro_y"].innerHTML = dataRow("Gyro Y", data[index].gyroY, " ");
+        document.getElementById("data").rows["gyro_z"].innerHTML = dataRow("Gyro Z", data[index].gyroZ, " ");
+
+        document.getElementById("timeClock").innerHTML = "The time is: " + theTime.getHours() + ":"
+            + (theTime.getMinutes() < 10 ? "0" + theTime.getMinutes() : theTime.getMinutes())
+            + ":" + (theTime.getSeconds() < 10 ? "0" + theTime.getSeconds() : theTime.getSeconds());
+
+        if (index < 500) {
+            index++;
+        }
+        else {
+            index = 0;
+        }
+    }
 }
 function getData() { //Retrieve the data from dataloader.js
     var loadedData = loadData();
@@ -127,10 +169,10 @@ function sound(srcFile) { //universal play sound function
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
     document.body.appendChild(this.sound);
-    this.play = function(){
+    this.play = function () {
         this.sound.play();
     }
-    this.stop = function(){
+    this.stop = function () {
         this.sound.pause();
     }
 }
@@ -162,7 +204,7 @@ class InputData {
         gyroX,
         gyroY,
         gyroZ,
-    ){
+    ) {
         this.time_seconds = time_seconds;
         this.latitude = latitude;
         this.longitude = longitude;
