@@ -72,3 +72,35 @@ function displaySpring() {
     console.log("displaySpring() function started");
     springLaunch.displayMissionParameters();
 }
+//playing with data structures
+function playingWithArrays() {
+    const myClasses = ["CSC102", "RBT131", "SPT323"];
+    console.log(myClasses[1]);
+    myClasses[1] = "CSC230";
+    console.log(myClasses[1]);
+    for (i = 0; i < myClasses.length; i++) {
+        console.log(myClasses[i]);
+    }
+}
+function playingWithStacks() {
+    let myStack = [];
+    myStack.push("First Item");
+    myStack.push("2nd Item");
+    myStack.push("Third Item");
+    console.log(myStack);
+    myStack.pop();
+    console.log(myStack);
+}
+function playingWithDictionaries() {
+    var myDiction = {
+        FirstName: "Chris",
+        "one": 1,
+        1: "some value"
+    };
+    console.log("Before the change");
+    console.log(myDiction["one"]);
+    myDiction["one"] = "the number formerly known as one";
+    console.log("After the change");
+    console.log(myDiction["one"]);
+    console.log(myDiction[1]);
+}
